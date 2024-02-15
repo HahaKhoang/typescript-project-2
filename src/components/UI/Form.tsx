@@ -4,13 +4,13 @@ import {
   useRef,
   useImperativeHandle,
   forwardRef,
-} from "react";
+} from 'react';
 
 export type FormHandle = {
   clear: () => void;
 };
 
-type FormProps = ComponentPropsWithoutRef<"form"> & {
+type FormProps = ComponentPropsWithoutRef<'form'> & {
   onSave: (value: unknown) => void;
 };
 
@@ -23,13 +23,13 @@ const Form = forwardRef<FormHandle, FormProps>(function Form(
   useImperativeHandle(ref, () => {
     return {
       clear() {
-        console.log("CLEARING");
+        console.log('CLEARING');
         form.current?.reset();
       },
     };
   });
 
-  function submitHandler(event: FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
@@ -38,7 +38,7 @@ const Form = forwardRef<FormHandle, FormProps>(function Form(
   }
 
   return (
-    <form onSubmit={submitHandler} {...otherProps} ref={form}>
+    <form onSubmit={handleSubmit} {...otherProps} ref={form}>
       {children}
     </form>
   );
